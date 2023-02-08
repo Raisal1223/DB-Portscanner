@@ -9,7 +9,7 @@ r = redis.Redis(host='localhost', port=6379, db=1)
 
 """ 
 Connect to the Redis server through Docker container
-Uncomment line 12 and 13 to have it communicate to the Docker
+Uncomment line 12 and 13 to have it communicate to the Docker container
 
 """
 # docker_container = "172.17.0.2"
