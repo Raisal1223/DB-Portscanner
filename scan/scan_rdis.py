@@ -1,6 +1,3 @@
-""" The purpose of this script is to store the open ports as a profile in Redis database. 
-Where the user have the option to load information from previous profile and overwrite the exsisting profile as needed. """
-
 # Add the required module for this application
 import socket
 import threading
@@ -10,42 +7,36 @@ import redis
 # Connect to Redis server from your local machine
 r = redis.Redis(host='localhost', port=6379, db=1)
 
-""" Connect to the Redis server through Docker container
-Uncomment line 12 and 13 to have it communicate to the Docker """
+# Uncomment line 12 and 13 to have it communicate to the Docker container
 # docker_container = "172.17.0.2"
 # r = redis.Redis(host=docker_container, port=6379, db=2)
 
 # Set the default timeout for the socket to 2 seconds
 socket.setdefaulttimeout(2)
 
-""" Adding lock object for the thread
-Purpose is to ensure that the data that is stored in Redis database is consistent and prevent any data corruption. """
+# adding lock object for consistent data storing in Redis
 object_lock = threading.Lock()
 
 # Enter an URL/IP you want to scan
 destination = input ("Enter the destination: ")
 
-# Define the profile name
-profile = input("Enter the profile name: ")
-
 # Retrieve the IP address from the URL
 hostIP = socket.gethostbyname(destination)
 print("Scanning the host IP: ", hostIP)
 
-# Here is the port scanner function that will show only the open ports
+# portscanner function to discover "open" ports
 def portscanner(ports):
     soxx = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         connection = soxx.connect((hostIP, ports))
         with object_lock:
             print("The port", ports, "is currently open.")
-            r.hset(profile, str(ports), 'open')
+            r.hset(hostIP, str(ports), 'open')
         connection.close()
     except:
         pass
 
-""" The purpose of que is to serve as a task queue for the threads in the script.
-The task holds the port that need to be scanned by the portscanner function. """
+# que object defined
 que = Queue()
 
 # Here is the function to start the threading process
@@ -55,12 +46,12 @@ def threader():
         portscanner(nodes)
         que.task_done()
 
-# Check if the profile exists in the database
-if r.exists(profile):
+# Check if data for the current destination IP exists
+if r.exists(hostIP, 'open'):
     # If the data exists prompt the user what action they want to perform
-    user_choice = input(f"Data for {profile} already exists. Do you want to use the previous data (Y/N/O(verwrite))?: ")
+    user_choice = input(f"Data for {hostIP} already exists. Do you want to use the previous data (Y/N/O(verwrite))?: ")
     if user_choice in ('Y', 'y', 'yes', 'Yes'):
-        existing_data = r.hgetall(profile)
+        existing_data = r.hgetall(hostIP)
         # Use the previous data
         print("Using the previous data...")
         for key, value in existing_data.items():
