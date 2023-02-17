@@ -1,0 +1,1 @@
+The script "export_rdis.py" is capable to export data that has been cached in Redis into CSV, XML, and JSON formats.
