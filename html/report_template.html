@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Report</title>
+	<style>
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			background-color: #f0f0f0;
+            padding: 20px;
+			margin: 0;
+            font-size: 20px
+		}
+
+		h1 {
+			color: #87CEEB;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		h2 {
+			color: #87CEEB;
+			text-align: center;
+			margin-top: 30px;
+			margin-left: -10px;
+		}
+
+		h3 {
+			color: #87CEEB;
+			text-align: center;
+			margin-top: 25px;
+			margin-left: -10px;
+		}
+
+		table {
+			border-collapse: collapse;
+			margin: auto;
+			margin-top: 50px;
+			box-shadow: 0px 0px 10px #d3d3d3;
+			background-color: white;
+			width: 30%;
+			border-radius: 10px;
+		}
+
+		th, td {
+			padding: 10px;
+			text-align: left;
+			width: 30%;
+			border-bottom: 1px solid #ddd;
+		}
+
+		th {
+			background-color: #87CEEB;
+			color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px #ccc
+		}
+
+        td {
+            font-weight: bold;
+            text-shadow: 1px 1px #ccc;
+        }   
+
+		tr:hover {
+			background-color: #f5f5f5;
+		}
+
+		a {
+			display: block;
+			margin: auto;
+			margin-top: 50px;
+			padding: 10px;
+			background-color: #87CEEB;
+			color: white;
+			text-align: center;
+			text-decoration: none;
+			border-radius: 10px;
+			width: 150px;
+		}
+
+		a:hover {
+			background-color: #333;
+		}
+	</style>
+</head>
+<body>
+	<h1> Scanning: {{ destination }}</h1>
+	<h2> IP_Address: {{ ip_address }}</h2>
+	<h3> Time: {{ now_str }}</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>Port</th>
+				<th>Service & Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for port, service in data.items() %}
+				<tr>
+					<td>{{ port }}</td>
+					<td>{{ service }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
