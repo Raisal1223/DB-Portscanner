@@ -1,3 +1,7 @@
+# Scans URLs/IPs and stores them in the Redis DB as an IP address
+
+# Beta Version : 0.01
+
 # Add the required module for this application
 import socket
 import threading

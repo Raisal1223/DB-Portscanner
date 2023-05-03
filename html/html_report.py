@@ -1,5 +1,7 @@
 # Creates HTML report for each url that is being scanned
 
+# Beta Version : 0.04
+
 # Import required modules
 import socket
 import threading

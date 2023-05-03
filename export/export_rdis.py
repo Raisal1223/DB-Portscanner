@@ -1,3 +1,7 @@
+# This scripts scans URLs/IPs and created reports in CSV, JSON and XML format
+
+# Beta Version : 0.03
+
 # Add the required module for this application
 import os
 import socket
