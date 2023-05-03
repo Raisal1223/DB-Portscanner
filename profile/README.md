@@ -1,1 +1,0 @@
-This script allows the user to scan the open ports of a specified IP address and store the information in a profile in the Redis database.

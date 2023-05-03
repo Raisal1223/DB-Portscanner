@@ -1,3 +1,7 @@
+# Stores scans in Redis DB by creating a profile 
+
+# Beta Version : 0.02
+
 # Add the required module for this application
 import socket
 import threading
