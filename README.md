@@ -15,3 +15,5 @@ Export: The "export_rdis.py" script can export data that has been cached in Redi
 HTML: This script performs port scanning on one or more URLs provided by the user. It uses the Nmap library to scan for open ports on each URL and saves the results to the Redis, MongoDB, Oracle, and MySQL databases. The program also generates an HTML report for each scanned URL, which includes information on the open ports and services detected, as well as the date and time of the scan. The user is prompted to choose whether to use existing data from previous scans or overwrite it with new data. The program uses multithreading to speed up the port scanning process.
 
 MySQL: This directory contains code for storing all the ports information in Redis and MySQL databases.
+
+ database_connectivity: this folder ensures that the database connection code is organized and reusable across multiple scripts. It simplifies the process of connecting to the Oracle, MongoDB, Redis, and MySQL databases, allowing for efficient data storage and retrieval during the scanning process.
